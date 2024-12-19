@@ -1,0 +1,42 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/var/www/app
+    environment:
+      MYSQL_DATABASE: 'pipeline'
+      MYSQL_USER: 'pipeline'
+      MYSQL_PASSWORD: '12345678'
+    restart: always
+    depends_on:
+      - db
+  db:
+    image: 'mysql:9.1'
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: '12345678'
+      MYSQL_DATABASE: 'pipeline'
+      MYSQL_USER: 'pipeline'
+      MYSQL_PASSWORD: '12345678'
+    volumes:
+      - ./db_data:/var/lib/mysql
+  npm:
+    image: 'node:23-alpine'
+    working_dir: /var/www/app
+    entrypoint: 'npm'
+    volumes:
+      - ./backend:/var/www/app
+  npx:
+    image: 'node:23-alpine'
+    working_dir: /var/www/app
+    entrypoint: 'npx'
+    volumes:
+      - ./backend:/var/www/app
+
+volumes:
+  db_data:
+    

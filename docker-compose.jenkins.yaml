@@ -1,0 +1,13 @@
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Jenkins.dockerfile
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
+      - "9092:9092"
