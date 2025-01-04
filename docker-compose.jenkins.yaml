@@ -6,8 +6,15 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
+    networks:
+      - default
   sonarqube:
     image: sonarqube:latest
     ports:
       - "9000:9000"
       - "9092:9092"
+    networks:
+      - default
+networks:
+  default:
+    

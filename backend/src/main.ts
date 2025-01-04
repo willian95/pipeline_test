@@ -4,9 +4,11 @@ import { Database } from './database';
 import { MysqlUserRepository } from './repositories/MysqlUser.repository';
 import { CreateUserService } from './services/createUser.service';
 import { User } from './user.interface';
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 
 Database.getInstance().initConnection()
 

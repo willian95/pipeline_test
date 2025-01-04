@@ -28,5 +28,11 @@ RUN apt-get install -y docker-ce-cli && \
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Layer 7: install nodejs
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash && \
+    . ~/.nvm/nvm.sh && \
+    nvm install 23 && \
+    nvm use 23
+
 # Switches back to jenkins user for Jenkins execution
 USER jenkins
